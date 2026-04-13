@@ -1,0 +1,9 @@
+# 核心依赖
+requests>=2.28.0
+PyYAML>=6.0
+
+# 可选依赖（通过extras_require安装）
+# colorama>=0.4.0  # 颜色输出
+# fastapi>=0.104.0  # Web服务器
+# uvicorn[standard]>=0.24.0  # ASGI服务器
+# pydantic>=2.0.0  # 数据验证
