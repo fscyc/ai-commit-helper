@@ -1,6 +1,0 @@
-# DeepSeek API 配置
-deepseek:
-  api_key: "sk-674703edec754e16823acb8a9f771e15"
-  model: "deepseek-chat"
-  base_url: "https://api.deepseek.com"
-  timeout: 30

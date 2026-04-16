@@ -1,0 +1,28 @@
+# DeepSeek API 配置示例
+# 将此文件复制为 deepseek_config.yaml 并填入您的 API 密钥
+# 注意：不要将包含真实密钥的配置文件提交到版本控制
+
+deepseek:
+  # 从 https://platform.deepseek.com/api_keys 获取 API 密钥
+  api_key: "sk-your_api_key_here"
+  model: "deepseek-chat"
+  base_url: "https://api.deepseek.com"
+  timeout: 30
+
+generation:
+  default_format: "conventional"
+  max_length: 100
+  temperature: 0.7
+  include_emoji: true
+  max_retries: 3
+
+output:
+  color: true
+  verbose: false
+  save_to_file: false
+  file_path: "~/.aicommit/history.json"
+
+templates:
+  conventional: "{{type}}({{scope}}): {{description}}\n\n{{body}}\n\n{{footer}}"
+  zh: "{{type}}({{scope}}): {{description}}\n\n{{body}}"
+  emoji: ":{{emoji}}: {{description}}\n\n{{body}}"
