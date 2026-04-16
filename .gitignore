@@ -184,3 +184,7 @@ test_output/
 .temp/
 tmp/
 temp/
+
+# npm配置和令牌
+.npmrc
+.npm-token

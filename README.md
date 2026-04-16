@@ -1,6 +1,14 @@
 # AI Commit Message Generator
 
+[![PyPI version](https://img.shields.io/pypi/v/ai-commit-helper.svg)](https://pypi.org/project/ai-commit-helper/)
+[![npm version](https://img.shields.io/npm/v/@fscyc/ai-commit-helper.svg)](https://www.npmjs.com/package/@fscyc/ai-commit-helper)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 基于AI的Git提交信息生成工具，帮助开发者自动生成专业、规范的提交信息。
+
+**支持多种安装方式：**
+- 🐍 **Python** (`pip install ai-commit-helper`) - 完整功能
+- 📦 **Node.js** (`npm install -g @fscyc/ai-commit-helper`) - 包装器实现（需Python版本）
 
 ## ✨ 功能特性
 
@@ -15,8 +23,9 @@
 
 ### 安装
 
+#### Python 版本（推荐，功能完整）
 ```bash
-# 从PyPI安装
+# 从PyPI安装（推荐）
 pip install ai-commit-helper
 
 # 或从源码安装
@@ -24,6 +33,14 @@ git clone https://github.com/fscyc/ai-commit-helper.git
 cd ai-commit-helper
 pip install -e .
 ```
+
+#### Node.js 版本（包装器，需Python版本）
+```bash
+# 从npm安装（需先安装Python版本）
+npm install -g @fscyc/ai-commit-helper
+```
+
+> **注意**：Node.js版本是一个包装器，它会自动调用Python版本（如果已安装）。如果未安装Python版本，会显示友好的降级提示。
 
 ### 基本使用
 
@@ -170,9 +187,10 @@ API端点：
 
 ## 💖 赞助
 
-如果这个工具对你有帮助，请考虑赞助支持：
+如果这个工具对你有帮助，请考虑赞助支持！
 
-[![GitHub Sponsors](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#EA4AAA)](https://github.com/sponsors/fscyc)
+> ⚠️ **赞助渠道正在设置中**
+> GitHub Sponsors 暂不可用（需要财政托管方）。我们正在设置 Ko‑Fi 或 Buy Me a Coffee 页面，即将推出！
 
 ## 📞 联系
 
