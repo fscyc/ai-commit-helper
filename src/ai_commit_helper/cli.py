@@ -125,6 +125,8 @@ def display_result(result: dict, color: bool = True):
         return
     
     message = result.get("message", "")
+    # 清理Unicode字符，避免Windows控制台编码问题
+    message = message.replace('✓', '[OK]').replace('✗', '[ERROR]')
     format_type = result.get("format", "conventional")
     
     if color:
@@ -135,41 +137,62 @@ def display_result(result: dict, color: bool = True):
             
             print(f"\n{Fore.GREEN}生成的提交信息 ({format_type}):{Style.RESET_ALL}")
             print(f"{Fore.CYAN}{'-' * 50}{Style.RESET_ALL}")
-            print(f"{Fore.YELLOW}{message}{Style.RESET_ALL}")
+            # 安全打印，避免编码错误
+            try:
+                print(f"{Fore.YELLOW}{message}{Style.RESET_ALL}")
+            except UnicodeEncodeError:
+                # 如果编码失败，尝试清理Unicode字符
+                safe_message = message.encode('gbk', 'ignore').decode('gbk')
+                print(f"{Fore.YELLOW}{safe_message}{Style.RESET_ALL}")
             print(f"{Fore.CYAN}{'-' * 50}{Style.RESET_ALL}")
             
         except ImportError:
             # 如果没有colorama，使用普通输出
             print(f"\n生成的提交信息 ({format_type}):")
             print("-" * 50)
-            print(message)
+            # 安全打印，避免编码错误
+            try:
+                print(message)
+            except UnicodeEncodeError:
+                # 如果编码失败，尝试清理Unicode字符
+                safe_message = message.encode('gbk', 'ignore').decode('gbk')
+                print(safe_message)
             print("-" * 50)
     else:
         print(f"\n生成的提交信息 ({format_type}):")
         print("-" * 50)
-        print(message)
+        # 安全打印，避免编码错误
+        try:
+            print(message)
+        except UnicodeEncodeError:
+            # 如果编码失败，尝试清理Unicode字符
+            safe_message = message.encode('gbk', 'ignore').decode('gbk')
+            print(safe_message)
         print("-" * 50)
     
     # 显示验证结果
     from .formats import validate_message
     is_valid, error = validate_message(message, format_type)
+    # 清理错误消息中的Unicode字符，避免Windows控制台编码问题
+    if error:
+        error = error.encode('gbk', 'ignore').decode('gbk')
     
     if is_valid:
         if color:
             try:
                 from colorama import Fore, Style
-                print(f"{Fore.GREEN}✓ 格式验证通过{Style.RESET_ALL}")
+                print(f"{Fore.GREEN}[OK] 格式验证通过{Style.RESET_ALL}")
             except ImportError:
-                print("✓ 格式验证通过")
+                print("[OK] 格式验证通过")
     else:
         if color:
             try:
                 from colorama import Fore, Style
-                print(f"{Fore.RED}✗ 格式验证失败: {error}{Style.RESET_ALL}")
+                print(f"{Fore.RED}[ERROR] 格式验证失败: {error}{Style.RESET_ALL}")
             except ImportError:
-                print(f"✗ 格式验证失败: {error}")
+                print(f"[ERROR] 格式验证失败: {error}")
         else:
-            print(f"✗ 格式验证失败: {error}")
+            print(f"[ERROR] 格式验证失败: {error}")
 
 
 def interactive_mode(config: Config):
@@ -292,9 +315,9 @@ def interactive_mode(config: Config):
                 is_valid, error = validate_message(message, format_type)
                 
                 if is_valid:
-                    print("✓ 格式验证通过")
+                    print("[OK] 格式验证通过")
                 else:
-                    print(f"✗ 格式验证失败: {error}")
+                    print(f"[ERROR] 格式验证失败: {error}")
             
             elif choice == "6":
                 # 格式转换
@@ -671,15 +694,20 @@ def main():
         is_valid, error = validate_message(message, args.format)
         
         if is_valid:
-            print("✓ 格式验证通过")
+            print("[OK] 格式验证通过")
             sys.exit(0)
         else:
-            print(f"✗ 格式验证失败: {error}")
+            print(f"[ERROR] 格式验证失败: {error}")
             sys.exit(1)
     
     else:
         # 显示帮助
         parser.print_help()
+    
+
+    
+    # 正常退出
+    sys.exit(0)
 
 
 if __name__ == "__main__":

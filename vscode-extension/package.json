@@ -1,0 +1,98 @@
+{
+  "name": "ai-commit-helper",
+  "displayName": "AI Commit Helper",
+  "description": "AI-powered Git commit message generator for VS Code",
+  "version": "0.1.0",
+  "publisher": "fscyc",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "ai-commit-helper.generate",
+        "title": "AI Commit Helper: Generate commit message"
+      },
+      {
+        "command": "ai-commit-helper.generateFromChanges",
+        "title": "AI Commit Helper: Generate from staged changes"
+      },
+      {
+        "command": "ai-commit-helper.generateFromUnstaged",
+        "title": "AI Commit Helper: Generate from unstaged changes"
+      },
+      {
+        "command": "ai-commit-helper.openWebUI",
+        "title": "AI Commit Helper: Open Web UI"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "ai-commit-helper.generate",
+          "when": "git.repository"
+        },
+        {
+          "command": "ai-commit-helper.generateFromChanges",
+          "when": "git.repository"
+        },
+        {
+          "command": "ai-commit-helper.generateFromUnstaged",
+          "when": "git.repository"
+        },
+        {
+          "command": "ai-commit-helper.openWebUI"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "AI Commit Helper",
+      "properties": {
+        "aiCommitHelper.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "DeepSeek API Key (leave empty to use config file)"
+        },
+        "aiCommitHelper.format": {
+          "type": "string",
+          "enum": ["conventional", "zh", "emoji"],
+          "default": "conventional",
+          "description": "Default commit message format"
+        },
+        "aiCommitHelper.autoStage": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically stage changes before generating"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "@types/vscode": "^1.80.0",
+    "typescript": "^5.3.3",
+    "@vscode/test-electron": "^2.3.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fscyc/ai-commit-helper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fscyc/ai-commit-helper/issues"
+  },
+  "homepage": "https://github.com/fscyc/ai-commit-helper#readme",
+  "license": "MIT",
+  "icon": "media/icon.png"
+}

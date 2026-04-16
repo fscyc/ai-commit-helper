@@ -144,7 +144,7 @@ class FormatValidator:
             if emoji in ["sparkles", "bug", "memo", "lipstick", "recycle", "white_check_mark", "wrench", "zap", "construction_worker", "package", "rewind"]:
                 pass  # 常见emoji文字别名
             else:
-                return False, f"emoji ':{}:' 无效，有效emoji：{', '.join(emoji_list)}"
+                return False, f"emoji ':{emoji}:' 无效，有效emoji：{', '.join(emoji_list)}"
         
         description = match.group("description")
         if len(description) < 5:
